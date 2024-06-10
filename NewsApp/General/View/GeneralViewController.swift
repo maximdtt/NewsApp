@@ -100,8 +100,10 @@ extension GeneralViewController: UICollectionViewDataSource {
 
 extension GeneralViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // initialize your new controller
-        // navcon.pushviewcontr
+        
+        let controller = GeneralDescriptionViewController()
+        navigationController?.pushViewController(controller, animated: true)
+
     }
 }
 
