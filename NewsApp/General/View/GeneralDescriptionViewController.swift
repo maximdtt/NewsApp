@@ -41,7 +41,7 @@ final class GeneralDescriptionViewController: UIViewController {
         let label = UILabel()
         
         label.text = "Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some "
-        //label.numberOfLines = .max
+        label.numberOfLines = .max
         
         return label
     }()
@@ -69,10 +69,7 @@ final class GeneralDescriptionViewController: UIViewController {
     //MARK: - Private methods
     
     private func setupUI() {
-        view.addSubview(dateLabel)
-        view.addSubview(titleLabel)
-        view.addSubview(imageView)
-        view.addSubview(scrollView)
+		[dateLabel, titleLabel, imageView, scrollView].forEach { view.addSubview($0) }
         scrollView.addSubview(desriptionLabel)
         
         setupConstraints()
@@ -80,8 +77,9 @@ final class GeneralDescriptionViewController: UIViewController {
     
     private func setupConstraints() {
         
-        dateLabel.snp.makeConstraints { 
-            $0.top.trailing.equalTo(view.safeAreaLayoutGuide) }
+		dateLabel.snp.makeConstraints {
+			$0.top.trailing.equalTo(view.safeAreaLayoutGuide)
+		}
         
         titleLabel.snp.makeConstraints { 
             $0.top.equalTo(dateLabel.snp.bottom).offset(30)
@@ -94,15 +92,13 @@ final class GeneralDescriptionViewController: UIViewController {
         }
         
         scrollView.snp.makeConstraints {
-            $0.top.equalTo(imageView.snp.bottom).inset(-25)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.top.equalTo(imageView.snp.bottom).offset(25)
+			$0.leading.trailing.bottom.equalToSuperview().inset(10) // зададим отступы для скролл-вью
         }
         
         desriptionLabel.snp.makeConstraints {
-            $0.top.equalTo(imageView.snp.bottom).inset(-25)
-            $0.leading.trailing.bottom.equalToSuperview()
+			$0.top.bottom.equalToSuperview()
+			$0.width.equalTo(scrollView.snp.width).inset(10) // ширину контента установим по ширине скролл-вью с отступом
         }
-        
-        
     }
 }
