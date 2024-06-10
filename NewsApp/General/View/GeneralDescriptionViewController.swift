@@ -40,9 +40,17 @@ final class GeneralDescriptionViewController: UIViewController {
     private lazy var desriptionLabel: UILabel = {
         let label = UILabel()
         
-        label.text = "Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about th"
+        label.text = "Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some "
+        //label.numberOfLines = .max
         
         return label
+    }()
+    
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        
+                
+        return scrollView
     }()
     
    //MARK: - Life Cycle
@@ -64,7 +72,8 @@ final class GeneralDescriptionViewController: UIViewController {
         view.addSubview(dateLabel)
         view.addSubview(titleLabel)
         view.addSubview(imageView)
-        view.addSubview(desriptionLabel)
+        view.addSubview(scrollView)
+        scrollView.addSubview(desriptionLabel)
         
         setupConstraints()
     }
@@ -84,10 +93,16 @@ final class GeneralDescriptionViewController: UIViewController {
             $0.leading.trailing.equalToSuperview().inset(7)
         }
         
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(imageView.snp.bottom).inset(-25)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+        
         desriptionLabel.snp.makeConstraints {
             $0.top.equalTo(imageView.snp.bottom).inset(-25)
-            $0.leading.trailing.equalToSuperview().inset(7)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
+        
         
     }
 }
