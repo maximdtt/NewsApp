@@ -69,13 +69,9 @@ final class GeneralDescriptionViewController: UIViewController {
     //MARK: - Private methods
     
     private func setupUI() {
-<<<<<<< HEAD
-        
+
         [dateLabel, titleLabel, imageView, scrollView].forEach { view.addSubview($0) }
         
-=======
-		[dateLabel, titleLabel, imageView, scrollView].forEach { view.addSubview($0) }
->>>>>>> 1fe4f546f81ef0389a64daba77c3aca72ab30403
         scrollView.addSubview(desriptionLabel)
         
         setupConstraints()
@@ -83,17 +79,16 @@ final class GeneralDescriptionViewController: UIViewController {
     
     private func setupConstraints() {
         
-<<<<<<< HEAD
         dateLabel.snp.makeConstraints {
             $0.top.trailing.equalTo(view.safeAreaLayoutGuide)
         }
-=======
-		dateLabel.snp.makeConstraints {
+		
+        dateLabel.snp.makeConstraints {
 			$0.top.trailing.equalTo(view.safeAreaLayoutGuide)
 		}
->>>>>>> 1fe4f546f81ef0389a64daba77c3aca72ab30403
         
-        titleLabel.snp.makeConstraints { 
+        
+        titleLabel.snp.makeConstraints {
             $0.top.equalTo(dateLabel.snp.bottom).offset(30)
             $0.centerX.equalToSuperview()
         }
@@ -105,21 +100,17 @@ final class GeneralDescriptionViewController: UIViewController {
         
         scrollView.snp.makeConstraints {
             $0.top.equalTo(imageView.snp.bottom).offset(25)
-<<<<<<< HEAD
             $0.leading.trailing.bottom.equalToSuperview().inset(10)
         }
         
         desriptionLabel.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
-            $0.width.equalTo(scrollView.snp.width).inset(10)
-=======
-			$0.leading.trailing.bottom.equalToSuperview().inset(10) // зададим отступы для скролл-вью
+			$0.leading.trailing.bottom.equalToSuperview().inset(10)
         }
         
         desriptionLabel.snp.makeConstraints {
 			$0.top.bottom.equalToSuperview()
-			$0.width.equalTo(scrollView.snp.width).inset(10) // ширину контента установим по ширине скролл-вью с отступом
->>>>>>> 1fe4f546f81ef0389a64daba77c3aca72ab30403
+			$0.width.equalTo(scrollView.snp.width).inset(10)
         }
     }
 }
