@@ -60,9 +60,9 @@ class TechnologyViewController: UIViewController {
     private func setupConstraints() {
         
         collectionView.snp.makeConstraints {
-            $0.top.equalToSuperview()
+
             $0.leading.trailing.equalToSuperview().inset(5)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide) }
+            $0.top.bottom.equalTo(view.safeAreaLayoutGuide) }
         
     }
 
