@@ -1,5 +1,5 @@
 //
-//  GeneralDescriptionViewController.swift
+//  NewsViewController.swift
 //  NewsApp
 //
 //  Created by Maksims Šalajevs on 10/06/2024.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class GeneralDescriptionViewController: UIViewController {
+final class NewsViewController: UIViewController {
    
     //MARK: - GUI Variables
     
