@@ -14,11 +14,10 @@ class TechnologyViewController: UIViewController {
 
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        let width = (view.frame.width - 15) / 2
         
-        layout.itemSize = CGSize(width: width, height: width)
         layout.minimumLineSpacing = 5
         layout.minimumInteritemSpacing = 5
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         
         
         
@@ -53,6 +52,7 @@ class TechnologyViewController: UIViewController {
         view.addSubview(collectionView)
         
         collectionView.register(GeneralCollectionViewCell.self, forCellWithReuseIdentifier: "GeneralCollectionViewCell")
+        collectionView.register(DetailsCollectionViewCell.self, forCellWithReuseIdentifier: "DetailsCollectionViewCell")
         
         setupConstraints()
     }
@@ -71,16 +71,28 @@ class TechnologyViewController: UIViewController {
 //MARK: - UICollectionViewDataSource
 
 extension TechnologyViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        2
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        15
+        section == 0 ? 1 : 15
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GeneralCollectionViewCell", for: indexPath) as? GeneralCollectionViewCell else {
-            return UICollectionViewCell()
+        
+        var cell: UICollectionViewCell?
+        if indexPath.section == 0 {
+
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GeneralCollectionViewCell", for: indexPath) as? GeneralCollectionViewCell
+            
+        } else {
+          
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DetailsCollectionViewCell", for: indexPath) as? DetailsCollectionViewCell
+            
         }
         
-        return cell
+        return cell ?? UICollectionViewCell()
     }
     
     
@@ -94,5 +106,18 @@ extension TechnologyViewController: UICollectionViewDelegate {
         let controller = NewsViewController()
         navigationController?.pushViewController(controller, animated: true)
 
+    }
+    
+}
+
+//MARK: - UICollectionViewDelegateFlowLayout
+extension TechnologyViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = view.frame.width
+        let firstSectionItemSize = CGSize(width: width, height: width)
+        
+        let secondSectionItemSize = CGSize(width: width, height: 100)
+        
+        return indexPath.section == 0 ? firstSectionItemSize : secondSectionItemSize
     }
 }

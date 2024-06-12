@@ -14,7 +14,7 @@ final class DetailsCollectionViewCell: UICollectionViewCell {
     private lazy var imageView: UIImageView = {
         let view = UIImageView()
         
-        view.image = UIImage(named: "image")
+        view.image = UIImage(named: "Image")
         view.contentMode = .scaleAspectFill
         view.layer.masksToBounds = true
         
@@ -79,7 +79,7 @@ final class DetailsCollectionViewCell: UICollectionViewCell {
         descriptionLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(5)
             $0.leading.equalTo(imageView.snp.trailing).offset(5)
-            $0.trailing.bottom.equalToSuperview()
+            $0.trailing.equalToSuperview()
         }
     }
 }
