@@ -14,6 +14,10 @@
 		318E9F7E2C1607870009F3E3 /* GeneralCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318E9F7D2C1607870009F3E3 /* GeneralCollectionViewCell.swift */; };
 		3190CCD42C14DB18005ACE7A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3190CCD32C14DB18005ACE7A /* SnapKit */; };
 		31BB95152C1A140F001F0BD4 /* DetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BB95142C1A140F001F0BD4 /* DetailsCollectionViewCell.swift */; };
+		31BB95172C1B5A13001F0BD4 /* GeneralViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BB95162C1B5A13001F0BD4 /* GeneralViewModel.swift */; };
+		31BB951A2C1B6088001F0BD4 /* NewsResponseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BB95192C1B6088001F0BD4 /* NewsResponseObject.swift */; };
+		31BB951C2C1B6183001F0BD4 /* ArticleResponseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BB951B2C1B6183001F0BD4 /* ArticleResponseObject.swift */; };
+		31BB951F2C1B6609001F0BD4 /* ArticleCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BB951E2C1B6609001F0BD4 /* ArticleCellViewModel.swift */; };
 		31CD48F32C130BF400A78D80 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD48F22C130BF400A78D80 /* TabBarController.swift */; };
 		31CD48F52C130E7E00A78D80 /* SportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD48F42C130E7E00A78D80 /* SportViewController.swift */; };
 		31CD48F72C130EAB00A78D80 /* TechnologyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CD48F62C130EAB00A78D80 /* TechnologyViewController.swift */; };
@@ -29,6 +33,10 @@
 		31196FDC2C1231270032628C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		318E9F7D2C1607870009F3E3 /* GeneralCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralCollectionViewCell.swift; sourceTree = "<group>"; };
 		31BB95142C1A140F001F0BD4 /* DetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCollectionViewCell.swift; sourceTree = "<group>"; };
+		31BB95162C1B5A13001F0BD4 /* GeneralViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralViewModel.swift; sourceTree = "<group>"; };
+		31BB95192C1B6088001F0BD4 /* NewsResponseObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsResponseObject.swift; sourceTree = "<group>"; };
+		31BB951B2C1B6183001F0BD4 /* ArticleResponseObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleResponseObject.swift; sourceTree = "<group>"; };
+		31BB951E2C1B6609001F0BD4 /* ArticleCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCellViewModel.swift; sourceTree = "<group>"; };
 		31CD48F22C130BF400A78D80 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		31CD48F42C130E7E00A78D80 /* SportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportViewController.swift; sourceTree = "<group>"; };
 		31CD48F62C130EAB00A78D80 /* TechnologyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechnologyViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +91,8 @@
 			isa = PBXGroup;
 			children = (
 				318E9F7C2C1607740009F3E3 /* View */,
+				31BB95182C1B5A20001F0BD4 /* ViewModel */,
+				31BB951D2C1B624F001F0BD4 /* Model */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -119,6 +129,24 @@
 				31E5A3982C17309300BFC937 /* NewsViewController.swift */,
 			);
 			path = News;
+			sourceTree = "<group>";
+		};
+		31BB95182C1B5A20001F0BD4 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				31BB95162C1B5A13001F0BD4 /* GeneralViewModel.swift */,
+				31BB951E2C1B6609001F0BD4 /* ArticleCellViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		31BB951D2C1B624F001F0BD4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				31BB95192C1B6088001F0BD4 /* NewsResponseObject.swift */,
+				31BB951B2C1B6183001F0BD4 /* ArticleResponseObject.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,12 +225,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31BB951C2C1B6183001F0BD4 /* ArticleResponseObject.swift in Sources */,
 				31CD48F72C130EAB00A78D80 /* TechnologyViewController.swift in Sources */,
 				31E5A3992C17309300BFC937 /* NewsViewController.swift in Sources */,
 				318E9F7E2C1607870009F3E3 /* GeneralCollectionViewCell.swift in Sources */,
 				31CD48F32C130BF400A78D80 /* TabBarController.swift in Sources */,
 				31196FD32C1231260032628C /* GeneralViewController.swift in Sources */,
+				31BB95172C1B5A13001F0BD4 /* GeneralViewModel.swift in Sources */,
+				31BB951A2C1B6088001F0BD4 /* NewsResponseObject.swift in Sources */,
 				31196FCF2C1231260032628C /* AppDelegate.swift in Sources */,
+				31BB951F2C1B6609001F0BD4 /* ArticleCellViewModel.swift in Sources */,
 				31CD48F52C130E7E00A78D80 /* SportViewController.swift in Sources */,
 				31BB95152C1A140F001F0BD4 /* DetailsCollectionViewCell.swift in Sources */,
 			);

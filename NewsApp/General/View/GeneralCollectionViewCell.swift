@@ -50,6 +50,11 @@ final class GeneralCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    //MARK: - Methods
+    
+    func set(article: ArticleCellViewModel) {
+        titleLabel.text = article.title
+    }
     
     //MARK: - Private methods
     
