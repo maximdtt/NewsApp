@@ -39,14 +39,16 @@ class GeneralViewController: UIViewController {
     }()
     
     //MARK: - Properties
-    private let viewModel: GeneralViewModelProtocol
+    private var viewModel: GeneralViewModelProtocol
     
     
     //MARK: - Life Cycle
     init(viewModel: GeneralViewModelProtocol) {
-        self.viewModel = viewModel
         
-        super.init()
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        self.setupViewModel()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -58,13 +60,22 @@ class GeneralViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setupUI()
-        
+        //collectionView.register(GeneralCollectionViewCell.self, forCellWithReuseIdentifier: "GeneralCollectionViewCell")
         
     }
     
     //MARK: - Methods
     
+    
+    
     //MARK: - Private methods
+    
+    private func setupViewModel() {
+        viewModel.reloadData = { [weak self] in
+            self?.collectionView.reloadData()
+            
+        }
+    }
     
     private func setupUI() {
         
@@ -93,7 +104,7 @@ class GeneralViewController: UIViewController {
 
 extension GeneralViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.articles.count
+        viewModel.numberOfCells
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

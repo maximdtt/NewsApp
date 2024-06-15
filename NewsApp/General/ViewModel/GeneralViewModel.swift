@@ -27,7 +27,11 @@ final class GeneralViewModel: GeneralViewModelProtocol {
     
     //MARK: - Properties
     
-    private var articles: [ArticleResponseObject] = []
+    private var articles: [ArticleResponseObject] = [] {
+        didSet {
+            reloadData?()  
+        }
+    }
     
     init() {
         loadData()
@@ -41,5 +45,17 @@ final class GeneralViewModel: GeneralViewModelProtocol {
     
     private func loadData() {
         //TODO: Load Data
+        setupMockObject()
+    }
+    
+    private func setupMockObject() {
+        articles = [
+            ArticleResponseObject(title: "First mock title", description: "First mock text hello", urlToImage: "....", publishedAt: "12.12.1212"),
+            ArticleResponseObject(title: "second mock title", description: "First mock text hello", urlToImage: "....", publishedAt: "12.12.1212"),
+            ArticleResponseObject(title: "third mock title", description: "First mock text hello", urlToImage: "....", publishedAt: "12.12.1212"),
+            ArticleResponseObject(title: "4.    mock title", description: "First mock text hello", urlToImage: "....", publishedAt: "12.12.1212"),
+            ArticleResponseObject(title: "fifth mock title", description: "First mock text hello", urlToImage: "....", publishedAt: "12.12.1212"),
+            
+        ]
     }
 }
