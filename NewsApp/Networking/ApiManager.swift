@@ -36,7 +36,14 @@ final class ApiManager {
         if let error = error {
             completion(.failure(NetworkingError.networkingError(error)))
         } else if let data = data {
-            
+            do {
+                let model = try JSONDecoder().decode(NewsResponseObject.self, from: data)
+                
+                completion(.success(model.articles ))
+            }
+            catch let decodeError {
+                completion(.failure(decodeError ))
+            }
         } else {
             completion(.failure(NetworkingError.unknown ))
         }

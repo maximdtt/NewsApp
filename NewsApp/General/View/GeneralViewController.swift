@@ -73,7 +73,11 @@ class GeneralViewController: UIViewController {
     private func setupViewModel() {
         viewModel.reloadData = { [weak self] in
             self?.collectionView.reloadData()
-            
+        }
+        
+        viewModel.showError = { error in
+            //TODO: show alert with error
+            print(error)
         }
     }
     
