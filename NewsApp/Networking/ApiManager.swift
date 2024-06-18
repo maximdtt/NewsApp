@@ -27,6 +27,19 @@ final class ApiManager {
         
     }
     
+    static func getImageData(url: String, completion: @escaping (Result<Data, Error>) -> ()) {
+        guard let url = URL(string: url) else { return }
+        
+        let session = URLSession.shared.dataTask(with: url) { data, _, error in
+            if let data = data {
+                completion(.success(data))
+            }
+            if let error = error {
+                completion(.failure(error))
+            }
+        }
+        
+    }
     
     // handle response
     private static func handleResponse(data: Data?,
