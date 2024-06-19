@@ -15,16 +15,14 @@ final class NewsViewController: UIViewController {
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
             
-        label.text = "2025.05.25"
-            
         return label
         }()
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         
-        label.text = "Title"
-        label.font = .systemFont(ofSize: 45)
+        label.font = .systemFont(ofSize: 35)
+        label.numberOfLines = .max
         
         return label
     }()
@@ -32,15 +30,11 @@ final class NewsViewController: UIViewController {
     private lazy var imageView: UIImageView = {
         let view = UIImageView()
         
-        view.image = UIImage(named: "Image") ?? UIImage.add
-        
         return view
     }()
     
     private lazy var desriptionLabel: UILabel = {
         let label = UILabel()
-        
-        label.text = "Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some description about the news.....Here will be some "
         label.numberOfLines = .max
         
         return label
@@ -52,8 +46,22 @@ final class NewsViewController: UIViewController {
                 
         return scrollView
     }()
+    //MARK: - Properties
+    
+    private let viewModel: NewsViewModelProtocol
     
    //MARK: - Life Cycle
+    
+    init(viewModel: NewsViewModelProtocol) {
+        
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,12 +77,24 @@ final class NewsViewController: UIViewController {
     //MARK: - Private methods
     
     private func setupUI() {
-
+        
         [dateLabel, titleLabel, imageView, scrollView].forEach { view.addSubview($0) }
         
         scrollView.addSubview(desriptionLabel)
         
-        setupConstraints()
+        titleLabel.text = viewModel.title
+        desriptionLabel.text = viewModel.description
+        dateLabel.text = viewModel.date
+        
+        if let data = viewModel.imageData,
+           let image = UIImage(data: data) {
+            
+            imageView.image = image
+        } else {
+            imageView.image = UIImage(named: "Image")
+            
+            setupConstraints()
+        }
     }
     
     private func setupConstraints() {
@@ -82,15 +102,10 @@ final class NewsViewController: UIViewController {
         dateLabel.snp.makeConstraints {
             $0.top.trailing.equalTo(view.safeAreaLayoutGuide)
         }
-		
-        dateLabel.snp.makeConstraints {
-			$0.top.trailing.equalTo(view.safeAreaLayoutGuide)
-		}
-        
         
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(dateLabel.snp.bottom).offset(30)
-            $0.centerX.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
         }
         
         imageView.snp.makeConstraints {

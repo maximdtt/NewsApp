@@ -135,7 +135,9 @@ extension GeneralViewController: UICollectionViewDataSource {
 extension GeneralViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let controller = NewsViewController()
+        let article = viewModel.getArticle(for: indexPath.row)
+        
+        let controller = NewsViewController(viewModel: NewsViewModel(article: article))
         navigationController?.pushViewController(controller, animated: true)
 
     }

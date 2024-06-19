@@ -103,8 +103,8 @@ extension TechnologyViewController: UICollectionViewDataSource {
 extension TechnologyViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let controller = NewsViewController()
-        navigationController?.pushViewController(controller, animated: true)
+        //let controller = NewsViewController()
+        //navigationController?.pushViewController(controller, animated: true)
 
     }
     
