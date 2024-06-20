@@ -1,13 +1,13 @@
 //
-//  GeneralViewModel.swift
+//  TechnologyViewModel.swift
 //  NewsApp
 //
-//  Created by Maksims Šalajevs on 13/06/2024.
+//  Created by Maksims Šalajevs on 20/06/2024.
 //
 
 import Foundation
 
-protocol GeneralViewModelProtocol {
+protocol TechnologyViewModelProtocol {
     var reloadData: (()  -> Void)? { get set }
     var showError: ((String) -> Void)? { get set }
     var reloadCell: ((Int) -> Void)? { get set  }
@@ -18,7 +18,7 @@ protocol GeneralViewModelProtocol {
     
 }
 
-final class GeneralViewModel: GeneralViewModelProtocol {
+final class TechnologyViewModel: TechnologyViewModelProtocol {
     var reloadCell: ((Int) -> Void)?
     
     var showError: ((String) -> Void)?
@@ -52,7 +52,7 @@ final class GeneralViewModel: GeneralViewModelProtocol {
     }
     
     private func loadData() {
-        ApiManager.getGeneralNews { [weak self] result in
+        ApiManager.getTechnologyNews { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let articles):

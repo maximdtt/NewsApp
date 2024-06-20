@@ -15,8 +15,20 @@ final class ApiManager {
     
     
     // create url path and make request
-    static func getNews(completion: @escaping (Result<[ArticleResponseObject], Error>) -> ()) {
+    static func getGeneralNews(completion: @escaping (Result<[ArticleResponseObject], Error>) -> ()) {
         let stringUrl = baseUrl + path + "?sources=bbc-news&language=en" + "&apiKey=\(apiKey)"
+        guard let url = URL(string: stringUrl) else { return }
+        
+        let session = URLSession.shared.dataTask(with: url) { data, response, error in
+            handleResponse(data: data, error: error, completion: completion)
+        }
+        
+        session.resume()
+        
+    }
+    
+    static func getTechnologyNews(completion: @escaping (Result<[ArticleResponseObject], Error>) -> ()) {
+        let stringUrl = baseUrl + path + "?sources=ars-technica&language=en" + "&apiKey=\(apiKey)"
         guard let url = URL(string: stringUrl) else { return }
         
         let session = URLSession.shared.dataTask(with: url) { data, response, error in
