@@ -28,7 +28,7 @@ final class ApiManager {
     }
     
     static func getTechnologyNews(completion: @escaping (Result<[ArticleResponseObject], Error>) -> ()) {
-        let stringUrl = baseUrl + path + "?sources=ars-technica&language=en" + "&apiKey=\(apiKey)"
+        let stringUrl = baseUrl + path + "?sources=techradar&language=en" + "&apiKey=\(apiKey)"
         guard let url = URL(string: stringUrl) else { return }
         
         let session = URLSession.shared.dataTask(with: url) { data, response, error in
