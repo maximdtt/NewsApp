@@ -14,7 +14,7 @@ final class DetailsCollectionViewCell: UICollectionViewCell {
     private lazy var imageView: UIImageView = {
         let view = UIImageView()
         
-        //view.image = UIImage(named: "Image")
+        
         view.contentMode = .scaleAspectFill
         view.layer.masksToBounds = true
         
@@ -26,7 +26,7 @@ final class DetailsCollectionViewCell: UICollectionViewCell {
         
         label.font = .boldSystemFont(ofSize: 16)
         label.textColor = .black
-        //label.text = "News Title"
+        
         label.numberOfLines = 2
         
         return label
@@ -37,7 +37,7 @@ final class DetailsCollectionViewCell: UICollectionViewCell {
         
         label.font = .systemFont(ofSize: 14)
         label.textColor = .gray
-        //label.text = "some news text will be here. please. remove this mock text"
+        
         label.numberOfLines = 2
         
         return label
