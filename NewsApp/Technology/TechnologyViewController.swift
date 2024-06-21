@@ -65,8 +65,10 @@ class TechnologyViewController: UIViewController {
         }
         
         viewModel.reloadCell = { [weak self] row in
-            self?.collectionView.reloadItems(at: [IndexPath(row: row, section: 0)])
             
+            row == 0 ?
+            self?.collectionView.reloadItems(at: [IndexPath(row: row, section: 0)]) :
+            self?.collectionView.reloadItems(at: [IndexPath(row: row, section: 1)])
         }
         
         viewModel.showError = { error in
@@ -109,7 +111,7 @@ extension TechnologyViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+        let article = viewModel.getArticle(for: indexPath.row)
         
         if indexPath.section == 0 {
 
@@ -117,7 +119,7 @@ extension TechnologyViewController: UICollectionViewDataSource {
                 return UICollectionViewCell()
             }
             
-            let article = viewModel.getArticle(for: indexPath.row)
+            //let article = viewModel.getArticle(for: indexPath.row)
             cell.set(article: article)
             
             return cell
@@ -128,7 +130,7 @@ extension TechnologyViewController: UICollectionViewDataSource {
                 return UICollectionViewCell()
             }
             
-            let article = viewModel.getArticle(for: indexPath.row)
+            //let article = viewModel.getArticle(for: indexPath.row)
             cell.set(article: article)
             
             return cell
