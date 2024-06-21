@@ -39,6 +39,12 @@ class TechnologyViewController: UIViewController {
         
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        
+        
+        collectionView.register(GeneralCollectionViewCell.self, forCellWithReuseIdentifier: "GeneralCollectionViewCell")
+        collectionView.register(DetailsCollectionViewCell.self, forCellWithReuseIdentifier: "DetailsCollectionViewCell")
+        
+        setupUI()
         self.setupViewModel()
         
     }
@@ -47,13 +53,13 @@ class TechnologyViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        setupUI()
-        
-        
-    }
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        // Do any additional setup after loading the view.
+//        
+//        
+//        
+//    }
     
     //MARK: - Methods
     
@@ -68,7 +74,7 @@ class TechnologyViewController: UIViewController {
             
             row == 0 ?
             self?.collectionView.reloadItems(at: [IndexPath(row: row, section: 0)]) :
-            self?.collectionView.reloadItems(at: [IndexPath(row: row, section: 1)])
+            self?.collectionView.reloadItems(at: [IndexPath(row: row-1, section: 1)])
         }
         
         viewModel.showError = { error in
@@ -82,8 +88,8 @@ class TechnologyViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(collectionView)
         
-        collectionView.register(GeneralCollectionViewCell.self, forCellWithReuseIdentifier: "GeneralCollectionViewCell")
-        collectionView.register(DetailsCollectionViewCell.self, forCellWithReuseIdentifier: "DetailsCollectionViewCell")
+//        collectionView.register(GeneralCollectionViewCell.self, forCellWithReuseIdentifier: "GeneralCollectionViewCell")
+//        collectionView.register(DetailsCollectionViewCell.self, forCellWithReuseIdentifier: "DetailsCollectionViewCell")
         
         setupConstraints()
     }
