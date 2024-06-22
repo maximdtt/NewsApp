@@ -44,6 +44,7 @@ class TechnologyViewController: UIViewController {
         collectionView.register(GeneralCollectionViewCell.self, forCellWithReuseIdentifier: "GeneralCollectionViewCell")
         collectionView.register(DetailsCollectionViewCell.self, forCellWithReuseIdentifier: "DetailsCollectionViewCell")
         
+        viewModel.loadData()
         setupUI()
         self.setupViewModel()
         
@@ -152,7 +153,7 @@ extension TechnologyViewController: UICollectionViewDataSource {
 extension TechnologyViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let article = viewModel.getArticle(for: indexPath.row)
+        let article = viewModel.getArticle(for: indexPath.section == 0 ? 0 : indexPath.row + 1)
         
         let controller = NewsViewController(viewModel: NewsViewModel(article: article))
         navigationController?.pushViewController(controller, animated: true)
