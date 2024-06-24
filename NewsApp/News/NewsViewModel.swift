@@ -14,21 +14,17 @@ protocol NewsViewModelProtocol {
     var imageData: Data? { get }
 }
 
-
 final class NewsViewModel: NewsViewModelProtocol {
+
     let title: String
-    
     let description: String
-    
     let date: String
-    
     let imageData: Data?
-    
-    
-    init(article: ArticleCellViewModel) {
+
+    init(article: ArticleDTO) {
         title = article.title
         description = article.description ?? ""
-        date = article.date
+        date = article.publishedAt ?? ""
         imageData = article.imageData
     }
 }

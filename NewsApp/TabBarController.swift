@@ -11,16 +11,13 @@ final class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.tintColor = .black
-        
         setupViewControllers()
         setupTabBar()
         
     }
     
     private func setupViewControllers() {
-
         viewControllers = [
             setupNavigationController(rootViewController: GeneralViewController(viewModel: GeneralViewModel()), title: "General", image: UIImage(systemName: "globe") ?? UIImage.add),
             setupNavigationController(rootViewController: TechnologyViewController(viewModel: TechnologyViewModel()), title: "Technology", image: UIImage(systemName: "laptopcomputer") ?? UIImage.add),
@@ -29,26 +26,22 @@ final class TabBarController: UITabBarController {
                 
         ]
     }
-    
+
     private func setupNavigationController(rootViewController: UIViewController,
                                            title: String,
                                            image: UIImage) -> UINavigationController {
-        
         let navigationController = UINavigationController(rootViewController: rootViewController)
         navigationController.tabBarItem.title = title
         navigationController.tabBarItem.image = image
         rootViewController.navigationItem.title = title
-        
         return navigationController
         
     }
-    
+
     private func setupTabBar() {
         let appearence = UITabBarAppearance()
         appearence.configureWithOpaqueBackground()
         tabBar.scrollEdgeAppearance = appearence
-        
         view.tintColor = .black
     }
-    
 }

@@ -8,98 +8,70 @@
 import Foundation
 
 protocol TechnologyViewModelProtocol {
-    var reloadData: (()  -> Void)? { get set }
+    var reloadData: (() -> Void)? { get set }
     var showError: ((String) -> Void)? { get set }
-    var reloadCell: ((Int) -> Void)? { get set  }
+    var reloadCell: ((Int) -> Void)? { get set }
     
     var numberOfCells: Int { get }
     
-    func getArticle(for row: Int) -> ArticleCellViewModel
+    func getArticle(for row: Int) -> ArticleDTO?
     
     func loadData()
 }
 
 final class TechnologyViewModel: TechnologyViewModelProtocol {
     var reloadCell: ((Int) -> Void)?
-    
     var showError: ((String) -> Void)?
-    
+    var reloadData: (() -> Void)?
     
     var numberOfCells: Int {
         articles.count
     }
     
-    var reloadData: (() -> Void)?
+    // MARK: - Properties
     
-    
-    //MARK: - Properties
-    
-    private var articles: [ArticleCellViewModel] = [] {
+    private var articles: [ArticleDTO] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.reloadData?()
             }
         }
     }
-     
-    func getArticle(for row: Int) -> ArticleCellViewModel {
-        let article = articles[row]
-        loadImage(for: row)
-        return article
-        
+    
+    func getArticle(for row: Int) -> ArticleDTO? {
+        guard row < articles.count else { return nil }
+        return articles[row]
     }
     
     func loadData() {
         ApiManager.getTechnologyNews { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let articles):
-                self.articles = self.convertToCellViewModel(articles)
-                //self.loadImage(for: 0)
+            case .success(let newsDTO):
+                self.articles = newsDTO.articles
+                self.loadImages()
             case .failure(let error):
                 DispatchQueue.main.async {
                     self.showError?(error.localizedDescription)
                 }
             }
         }
-        
     }
-     
-    private func loadImage(for row: Int) {
-        //TODO: get imageData
-        
-        guard let url = URL(string: articles[row].imageUrl),
-              let data = try? Data(contentsOf: url) else { return }
-        
-        articles[row].imageData = data
-        reloadCell?(row)
-        
-//        for (index, article) in articles.enumerated() {
-//            ApiManager.getImageData(url: article.imageUrl) { [weak self] result in
-//                    
-//                    DispatchQueue.main.async {
-//                        switch result {
-//                        case .success(let data):
-//                            self?.articles[index].imageData = data
-//                            self?.reloadCell?(index)
-//                        case .failure(let error):
-//                            self?.showError?(error.localizedDescription)
-//                        }
-//                    }
-//                }
-//            }
+    
+    private func loadImages() {
+        for (index, article) in articles.enumerated() {
+            guard let urlToImage = article.urlToImage else { continue }
+            ApiManager.getImageData(url: urlToImage) { [weak self] result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let data):
+                        self?.articles[index].imageData = data
+                        self?.reloadCell?(index)
+                    case .failure(let error):
+                        self?.showError?(error.localizedDescription)
+                    }
+                }
+            }
         }
-    
-    
-    private func convertToCellViewModel(_ articles: [ArticleResponseObject]) -> [ArticleCellViewModel] {
-        
-        articles.map { ArticleCellViewModel(article: $0) }
-    }
-    
-    private func setupMockObject() {
-        articles = [
-            ArticleCellViewModel(article: ArticleResponseObject(title: "First mock title", description: "First mock text hello", urlToImage: "....", date: "12.12.1212"))
-            
-        ]
     }
 }

@@ -14,24 +14,16 @@ class GeneralViewController: UIViewController {
     
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
-    
-        
-        
         return searchBar
     }()
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let width = (view.frame.width - 15) / 2
-        
         layout.itemSize = CGSize(width: width, height: width)
         layout.minimumLineSpacing = 5
         layout.minimumInteritemSpacing = 5
-        
-        
-        
         let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height - searchBar.frame.height), collectionViewLayout: layout)
-        
         collectionView.dataSource = self
         collectionView.delegate = self
         
@@ -48,7 +40,6 @@ class GeneralViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         self.setupViewModel()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -58,7 +49,7 @@ class GeneralViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
         setupUI()
         //collectionView.register(GeneralCollectionViewCell.self, forCellWithReuseIdentifier: "GeneralCollectionViewCell")
         
@@ -117,17 +108,17 @@ extension GeneralViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GeneralCollectionViewCell", for: indexPath) as? GeneralCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GeneralCollectionViewCell.reuseID, for: indexPath) as? GeneralCollectionViewCell else {
             return UICollectionViewCell()
         }
         
-        let article = viewModel.getArticle(for: indexPath.row)
+        guard let article = viewModel.getArticle(for: indexPath.row) else {
+            return UICollectionViewCell()
+        }
         cell.set(article: article)
-        
+
         return cell
     }
-    
-    
 }
 
 //MARK: - UICollectionViewDelegate
@@ -135,7 +126,7 @@ extension GeneralViewController: UICollectionViewDataSource {
 extension GeneralViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let article = viewModel.getArticle(for: indexPath.row)
+        guard let article = viewModel.getArticle(for: indexPath.row) else { return }
         
         let controller = NewsViewController(viewModel: NewsViewModel(article: article))
         navigationController?.pushViewController(controller, animated: true)

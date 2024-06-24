@@ -9,6 +9,9 @@ import UIKit
 import SnapKit
 
 final class DetailsCollectionViewCell: UICollectionViewCell {
+    
+    static let reuseID = "DetailsCollectionViewCell"
+    
     //MARK: - GUI Variables
     
     private lazy var imageView: UIImageView = {
@@ -57,7 +60,7 @@ final class DetailsCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Methods
     
-    func set(article: ArticleCellViewModel) {
+    func set(article: ArticleDTO) {
         titleLabel.text = article.title
         descriptionLabel.text = article.description
         

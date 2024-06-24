@@ -41,8 +41,8 @@ class TechnologyViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         
-        collectionView.register(GeneralCollectionViewCell.self, forCellWithReuseIdentifier: "GeneralCollectionViewCell")
-        collectionView.register(DetailsCollectionViewCell.self, forCellWithReuseIdentifier: "DetailsCollectionViewCell")
+        collectionView.register(GeneralCollectionViewCell.self, forCellWithReuseIdentifier: GeneralCollectionViewCell.reuseID)
+        collectionView.register(DetailsCollectionViewCell.self, forCellWithReuseIdentifier: DetailsCollectionViewCell.reuseID)
         
         viewModel.loadData()
         setupUI()
@@ -118,11 +118,11 @@ extension TechnologyViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let article = viewModel.getArticle(for: indexPath.row)
+        guard let article = viewModel.getArticle(for: indexPath.row) else { return  UICollectionViewCell()}
         
         if indexPath.section == 0 {
 
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GeneralCollectionViewCell", for: indexPath) as? GeneralCollectionViewCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GeneralCollectionViewCell.reuseID, for: indexPath) as? GeneralCollectionViewCell else {
                 return UICollectionViewCell()
             }
             
@@ -133,7 +133,7 @@ extension TechnologyViewController: UICollectionViewDataSource {
             
         } else {
           
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DetailsCollectionViewCell", for: indexPath) as? DetailsCollectionViewCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailsCollectionViewCell.reuseID, for: indexPath) as? DetailsCollectionViewCell else {
                 return UICollectionViewCell()
             }
             
@@ -153,7 +153,7 @@ extension TechnologyViewController: UICollectionViewDataSource {
 extension TechnologyViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let article = viewModel.getArticle(for: indexPath.section == 0 ? 0 : indexPath.row + 1)
+        guard let article = viewModel.getArticle(for: indexPath.section == 0 ? 0 : indexPath.row + 1) else { return }
         
         let controller = NewsViewController(viewModel: NewsViewModel(article: article))
         navigationController?.pushViewController(controller, animated: true)
